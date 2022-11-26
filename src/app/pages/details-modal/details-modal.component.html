@@ -1,0 +1,115 @@
+<ion-header *ngIf="movieDetails">
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-button (click)="onModalClose()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title color="primary" class="ion-text-center"
+      ><h2 class="ion-text-wrap">{{ movieDetails.title }}</h2></ion-title
+    >
+  </ion-toolbar>
+</ion-header>
+<br />
+<ion-content *ngIf="movieDetails">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="5" size-md="4" offset-md="2">
+        <img
+          src="https://image.tmdb.org/t/p/w500{{ movieDetails.poster_path }}"
+        />
+        <ion-chip outline color="primary">
+          <ion-icon name="timer-outline" color="primary"></ion-icon>
+          <ion-label>{{ hours }}h {{ movieDetails.runtime % 60 }}m</ion-label>
+        </ion-chip>
+        <ion-chip outline color="primary">
+          <ion-icon name="star-half-outline" color="white"></ion-icon>
+          <ion-label>{{ movieDetails.vote_average }} / 10</ion-label>
+        </ion-chip>
+        <ion-chip outline color="primary">
+          <ion-icon name="calendar-outline" color="primary"></ion-icon>
+          <ion-label>{{ movieDetails.release_date | date: "d/M/Y" }}</ion-label>
+        </ion-chip>
+      </ion-col>
+      <ion-col size="6" offset="1" size-md="4">
+        <ion-text color="primary">
+          <h3>Summary</h3>
+        </ion-text>
+        <hr />
+        <p>{{ movieDetails.overview }}</p>
+        <hr />
+        <ion-chip color="primary" *ngFor="let genre of movieDetails.genres">
+          <ion-label>{{ genre.name }}</ion-label>
+        </ion-chip>
+      </ion-col>
+    </ion-row>
+    <hr />
+    <ion-row>
+      <ion-col>
+        <ion-button
+          color="success"
+          size="small"
+          href="{{ movieDetails.homepage }}"
+          shape="round"
+          >Official Page</ion-button
+        >
+        <ion-button
+          color="warning"
+          size="small"
+          href="https://www.imdb.com/title/{{ movieDetails.imdb_id }}/"
+          shape="round"
+          ><b>IMDB</b></ion-button
+        >
+      </ion-col>
+    </ion-row>
+    <hr />
+    <ion-row>
+      <ion-col size="6" size-md="6">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title
+              ><ion-text color="primary">Crew</ion-text></ion-card-title
+            >
+          </ion-card-header>
+          <ion-card-content>
+            <ion-list>
+              <ion-item *ngFor="let crew of movieCrew">
+                <ion-label class="ion-text-wrap">
+                  <h4>
+                    {{ crew.name }}
+                  </h4>
+                  <p class="ion-text-wrap">
+                    {{ crew.job }}
+                  </p>
+                </ion-label>
+              </ion-item>
+            </ion-list>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col size="6" size-md="6">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title
+              ><ion-text color="primary">Cast</ion-text></ion-card-title
+            >
+          </ion-card-header>
+          <ion-card-content>
+            <ion-list>
+              <ion-item *ngFor="let cast of movieCast">
+                <ion-label class="ion-text-wrap">
+                  <h4>
+                    {{ cast.name }}
+                  </h4>
+                  <p class="ion-text-wrap">
+                    {{ cast.character }}
+                  </p>
+                </ion-label>
+              </ion-item>
+            </ion-list>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title color="primary" class="ion-text-center"
+      ><h1>
+        <ion-icon name="film-outline"></ion-icon> Popular Movies
+        <ion-icon name="film-outline"></ion-icon></h1
+    ></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size-md="6" offset-md="3">
+        <ion-card>
+          <ion-card-header>
+            <h3>Pick a movie to see details</h3>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-item
+              *ngFor="let movie of (movies | async).movies"
+              (click)="onOpenDetails(movie.id)"
+            >
+              <ion-avatar slot="start">
+                <img
+                  src="https://image.tmdb.org/t/p/w500{{movie.poster_path}}"
+                />
+              </ion-avatar>
+              <ion-label>
+                <h3>{{movie.title}}</h3>
+                <p>
+                  <ion-icon name="star-half-outline" color="primary"></ion-icon>
+                  {{movie.vote_average}}
+                </p>
+              </ion-label>
+            </ion-item>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
