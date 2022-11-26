@@ -1,0 +1,7 @@
+{
+  "name": "pop-movies",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
